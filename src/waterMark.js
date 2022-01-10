@@ -9,7 +9,7 @@ const doAction = () => {
 const toWaterMark = () => {
     let rootUrl = __dirname.split("src")[0].replace(/\\/g, "/");
     let imgWidth, imgHeight;
-    let originalImg = rootUrl + "/img/test.jpg";
+    let originalImg = rootUrl + "img/test.jpg";
     gm(originalImg)	//指定添加水印的图片
         .size(function (err, val) {
             imgWidth = val.width;
@@ -20,7 +20,7 @@ const toWaterMark = () => {
         .font(rootUrl + "font/msyh.ttf", 30) //字库所在文件夹和字体大小
         .drawText(50, 50, "中文China")
         .rotate("white", 50)
-        .write(rootUrl + "/img/watermark.jpg", function (err) {
+        .write(rootUrl + "img/watermark.jpg", function (err) {
             if (!err) timeUT.consoleEndCli("water");
             else console.log(err);
         });
