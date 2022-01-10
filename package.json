@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "commander": "^8.3.0",
+    "gm": "^1.23.1",
     "images": "^3.2.3",
     "node-xlsx": "^0.21.0",
     "silly-datetime": "^0.1.2",

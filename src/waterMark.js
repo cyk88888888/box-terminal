@@ -1,27 +1,22 @@
-const images = require('images');
+const gm = require('gm').subClass({ imageMagick: true });
 const timeUT = require('../lib/timeUT');
 
-const doAction = () =>{
+const doAction = () => {
     timeUT.consoleStartCli("water", new Date());
     toWaterMark();
 }
 
-const toWaterMark = ()  => {
-    var watermarkImg = images('water_logo.png');
-    var sourceImg = images('source.jpg');
-
-// 比如放置在右下角，先获取原图的尺寸和水印图片尺寸
-    var sWidth = sourceImg.width();
-    var sHeight = sourceImg.height();
-    var wmWidth = watermarkImg.width();
-    var wmHeight = watermarkImg.height();
-
-    images(sourceImg)
-    // 设置绘制的坐标位置，右下角距离 40px
-        .draw(watermarkImg, sWidth - wmWidth - 40, sHeight - wmHeight - 40)
-        // 保存格式会自动识别
-        .save('saveimg.png');
-    timeUT.consoleEndCli("water");
+const toWaterMark = () => {
+    let rootUrl = __dirname.split("src")[0].replace(/\\/g,"/");
+    gm(rootUrl + "/img/test.jpg")	//指定添加水印的图片
+        .stroke("white")		//字体外围颜色
+        .fill("white")			//字体内围颜色（不设置默认为黑色）
+        .font(rootUrl + "font/msyh.ttf", 30) //字库所在文件夹和字体大小
+        .drawText(50, 50, "中文China")
+        .write(rootUrl + "/img/watermark.jpg", function (err) {
+            if (!err) timeUT.consoleEndCli("water");
+            else console.log(err);
+        });
 }
 
 module.exports = {
