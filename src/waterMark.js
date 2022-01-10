@@ -1,7 +1,8 @@
 const images = require('images');
+const timeUT = require('../lib/timeUT');
 
 const doAction = () =>{
-    console.log(">>>>>>>>开始执行命令【water】（" + process.cwd() + "）...<<<<<<<<");
+    timeUT.consoleStartCli("water", new Date());
     toWaterMark();
 }
 
@@ -20,8 +21,7 @@ const toWaterMark = ()  => {
         .draw(watermarkImg, sWidth - wmWidth - 40, sHeight - wmHeight - 40)
         // 保存格式会自动识别
         .save('saveimg.png');
-
-    console.log('finish!')
+    timeUT.consoleEndCli("water");
 }
 
 module.exports = {

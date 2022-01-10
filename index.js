@@ -3,9 +3,9 @@
 const program = require('commander');
 const fs = require('fs');
 const path = require('path');
-const excel = require('./lib/langToJs');
-const water = require('./lib/waterMark');
-const getLang = require('./lib/getChinese');
+const excel = require('./src/langToJs');
+const water = require('./src/waterMark');
+const getLang = require('./src/getChinese');
 
 //解析xlsx为多语言js文件
 program.command('xlsx')

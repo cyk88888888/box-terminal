@@ -1,7 +1,9 @@
-const fs = require('fs')
-const path = require('path')
-const os = require('os')
-const readline = require('readline')
+const fs = require('fs');
+const path = require('path');
+const os = require('os');
+const readline = require('readline');
+const timeUT = require('../lib/timeUT');
+
 let test = /[\u4E00-\u9FA5\uF900-\uFA2D]+[\u4E00-\u9FA5\uF900-\uFA2D\uff01\uff08-\uff1f\u3001-\u3015\u0020a-zA-Z\d\\\/+*/-]*/
 let rl = null
 let lang = {}
@@ -9,7 +11,7 @@ let isNote = false
 let dirU = os.type().toLowerCase().includes('window') ? '\\' : '/' // window环境使用‘\\’mac系统使用‘/’
 
 const doAction = (fileName = 'zh_cn.json', ignoredir) => {
-    console.log(">>>>>>>>开始执行命令【getlang】（" + process.cwd() + "）...<<<<<<<<");
+    timeUT.consoleStartCli("getlang", new Date());
     readFileList(ignoredir).then(res => {
         inputLangs(fileName)
     }).catch(err => {
@@ -152,8 +154,8 @@ function inputLangs(fileName) {
         } else {
         }
     }
-    console.log(lang)
-    console.log(cs_Lang['cs_common'])
+    // console.log(lang)
+    // console.log(cs_Lang['cs_common'])
     for (item in lang) {
         let arr = lang[item]
         if (!cs_Lang[`cs_${item}`]) {
@@ -170,16 +172,16 @@ function inputLangs(fileName) {
             }
         }
     }
-    console.log('----------------------------------------------------\n')
+    // console.log('----------------------------------------------------\n')
 
-    console.log(cs_Lang)
+    // console.log(cs_Lang)
     let str = JSON.stringify(cs_Lang).replace(/\"/g, '\'')
 
-    fs.writeFile(fileName, str, function (error) {
+    fs.writeFile(fileName, str, function (error) {``
         if (error) {
             console.log(error)
         } else {
-            console.log('collect lang finish!')
+            timeUT.consoleEndCli("getlang");
         }
     })
 }

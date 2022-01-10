@@ -1,6 +1,7 @@
-const xlsx = require('node-xlsx').default
+const xlsx = require('node-xlsx').default;
 const fs = require('fs');
 const path = require('path');
+const timeUT = require('../lib/timeUT')
 let cfg;
 if(process.cwd().indexOf("box_client") > -1 && process.cwd().indexOf("uni-app") > -1){
     cfg = require(process.cwd() + '/lang/langCfg');
@@ -11,7 +12,7 @@ const doAction = () =>{
         process.exit();
         return;
     }
-    console.log(">>>>>>>>开始执行命令【xlsx】（" + process.cwd() + "）...<<<<<<<<");
+    timeUT.consoleStartCli("xlsx", new Date());
     let xlsxVersion = cfg.xlsxVersion;
     let xlsxRoot = process.cwd().split("box_client")[0] + "box_cfg" + path.sep + xlsxVersion + path.sep + "lang";//xlsx根目录
     let writeJsRoot = process.cwd() + path.sep + "lang"+ path.sep +"langs";//要写入的js多语言文件根目录
@@ -29,8 +30,7 @@ const doAction = () =>{
                         if (err) {
                             console.error(err)
                         } else {
-                            // console.log("%s: 命令【xlsx】执行完毕，共耗时%s秒！");
-                            console.log('finish!')
+                            timeUT.consoleEndCli("xlsx");
                         }
                     })
                 }
