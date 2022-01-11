@@ -9,9 +9,10 @@ const getLang = require('./src/getChinese');
 
 //解析xlsx为多语言js文件
 program.command('xlsx')
-    .description('必须cd到box_client/uni-app下执行命令，将box_cfg下对应版本目录lang.xlsx解析为多语言js文件')
-    .action(() => {
-        excel.doAction();
+    .description('必须cd到box_client/uni-app下执行命令，将box_cfg下对应版本目录lang.xlsx解析为多语言文件')
+    .option('-t, --type <type>', '[optional]设置解析xlsx为.json格式还是.js格式，默认为.json\n')
+    .action((type = "json") => {
+        excel.doAction(type);
     })
 
 //给图片加水印
@@ -21,7 +22,7 @@ program.command('water')
         water.doAction();
     })
 
-// 中文收集并生成key对应中文的json文件  i18n-cli getlang uni-app -f zh.json -d pages,components
+// 中文收集并生成key对应中文的json文件  i18n-cli getlang -f zh.json -d pages,components
 program.command('getlang')
     .description('对当前目录下的 .js .vue .json .php文件进行中文收集，默认当前目录下面所有文件\n')
     .option('-f, --filename <filename>', '[optional]设置生成的文件名，默认为 zh_cn.json，需为 .json 文件\n')
