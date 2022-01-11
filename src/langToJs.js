@@ -40,8 +40,9 @@ const doAction = () =>{
 }
 
 const tojs = (xlsxRoot,writeJsRoot,cb)  => {
-    console.log("xlsxRoot----------------------->" + xlsxRoot);
-    console.log("writeJsRoot----------------------->" + writeJsRoot);
+    let curTimeStr = timeUT.getCurTimeStr();
+    console.log("%s: xlsxRoot----------------------->%s", curTimeStr, xlsxRoot);
+    console.log("%s: writeJsRoot----------------------->%s", curTimeStr, writeJsRoot);
     try {
         fs.readdir(xlsxRoot, function(err, files){
             if(err){
@@ -49,8 +50,7 @@ const tojs = (xlsxRoot,writeJsRoot,cb)  => {
             }else{
                 files.forEach(function(filename){
                     if(filename.split(".")[1] == "xlsx" && filename.indexOf("$") == -1){//判断是否为xlsx文件
-                        // console.log(xlsxRoot + path.sep +  filename + "--------jsName: " + filename.split(".")[0] + ".js");
-                        writeToJs(xlsxRoot + path.sep +  filename, writeJsRoot);
+                        writeToFile(xlsxRoot + path.sep +  filename, writeJsRoot);
                     }
                 });
                 cb();
@@ -62,11 +62,11 @@ const tojs = (xlsxRoot,writeJsRoot,cb)  => {
     }
 
     /**
-     * 写入到js文件
+     * 写入内容到文件
      * @param xlsxUrl 对应xlsx文件的全路径
      * @param toJsName 要写入的js文件名
      */
-    function writeToJs(xlsxUrl, writeJsRoot){
+    function writeToFile(xlsxUrl, writeJsRoot,isJson = false){
         try {
             let res = fs.readFileSync(xlsxUrl);
             const xlsxData = xlsx.parse(res)[0].data; // 第一个sheet
@@ -90,13 +90,11 @@ const tojs = (xlsxRoot,writeJsRoot,cb)  => {
                     langMap[lang][key] = value;
                 }
             }
-
             for(let lang in langMap){
-                let toJsName = lang + ".js";
+                let toJsName = lang + (isJson ? ".json" : ".js");
                 let langJsonData = langMap[lang];
-                let code = `export default ${JSON.stringify(langJsonData, '', 2).replace(/\"/g, '\'')}\r\n`;
+                let code = `export default ${JSON.stringify(langJsonData, '', 2).replace(/\"/g, '\'')}`;
                 let writeUrl = writeJsRoot + path.sep + toJsName;//写入的js文件目录地址
-                // console.log("writeUrl------------------->" + writeUrl);
                 fs.writeFile(writeUrl, code,{'flag':'w'}, function(err) {
                     if (err) console.error(err)
                 });
@@ -107,6 +105,7 @@ const tojs = (xlsxRoot,writeJsRoot,cb)  => {
         }
     }
 }
+
 module.exports = {
     doAction
 }
