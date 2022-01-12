@@ -11,7 +11,7 @@ const getLang = require('./src/getChinese');
 program.command('xlsx')
     .description('必须cd到box_client/uni-app下执行命令，将box_cfg下对应版本目录lang.xlsx解析为多语言文件')
     .option('-t, --type <type>', '[optional]设置解析xlsx为.json格式还是.js格式，默认为.json\n')
-    .action((type = "json") => {
+    .action(({type = "json"}) => {
         excel.doAction(type);
     })
 
