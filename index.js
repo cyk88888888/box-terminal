@@ -8,7 +8,7 @@ const water = require('./src/waterMark');
 const getLang = require('./src/getChinese');
 const loadImg = require('./src/loadImg');
 
-//解析xlsx为多语言js文件
+//解析xlsx为多语言文件
 program.command('xlsx')
     .description('必须cd到box_client/uni-app下执行命令，将box_cfg下对应版本目录lang.xlsx解析为多语言文件')
     .option('-t, --type <type>', '[optional]设置解析xlsx为.json格式还是.js格式，默认为.json\n')
