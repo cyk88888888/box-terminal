@@ -6,6 +6,7 @@ const path = require('path');
 const excel = require('./src/langToJs');
 const water = require('./src/waterMark');
 const getLang = require('./src/getChinese');
+const loadImg = require('./src/loadImg');
 
 //解析xlsx为多语言js文件
 program.command('xlsx')
@@ -22,6 +23,13 @@ program.command('water')
         water.doAction();
     })
 
+//从网络上下载图片
+program.command('loadimg')
+.description('从网络上下载图片')
+.action(() => {
+    loadImg.doAction();
+})
+    
 // 中文收集并生成key对应中文的json文件  i18n-cli getlang -f zh.json -d pages,components
 program.command('getlang')
     .description('对当前目录下的 .js .vue .json .php文件进行中文收集，默认当前目录下面所有文件\n')
