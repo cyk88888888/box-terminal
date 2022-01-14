@@ -7,6 +7,7 @@ const excel = require('./src/langToJs');
 const water = require('./src/waterMark');
 const getLang = require('./src/getChinese');
 const loadImg = require('./src/loadImg');
+const test = require('./src/test');
 
 //解析xlsx为多语言文件
 program.command('xlsx')
@@ -40,6 +41,13 @@ program.command('getlang')
     .action(({filename = 'zh_cn.json', ignoredir}) => {
         getLang.doAction(filename, ignoredir);
     });
+
+//从网络上下载图片
+program.command('test')
+.description('测试脚本')
+.action(() => {
+    test.doAction();
+})
 
 program.on('command:*', function () {
     console.error('Invalid command: %s\nSee --help for a list of available commands.', program.args.join(' '));
