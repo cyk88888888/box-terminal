@@ -8,7 +8,7 @@ const doAction = (type = 'json') => {
     timeUT.consoleStartCli("loadimg", new Date());
 
     let xlsxRoot = process.cwd();//xlsx根目录
-    let writeImgRoot = process.cwd() + path.sep + "loadImg";//要写入的js多语言文件根目录
+    let writeImgRoot = process.cwd() + path.sep + "loadImg";//要写入的文件根目录
 
     fs.access(xlsxRoot, (err) => {
         if (err) {
@@ -38,6 +38,7 @@ const readFile = (xlsxRoot, writeImgRoot, cb) => {
             } else {
                 files.forEach(function (filename) {
                     if (filename.split(".")[1] == "xlsx" && filename.indexOf("$") == -1) {//判断是否为xlsx文件
+                        console.log(filename);
                         writeToFile(xlsxRoot + path.sep + filename, writeImgRoot).then(() => {
                             cb();
                         });
@@ -58,8 +59,8 @@ const readFile = (xlsxRoot, writeImgRoot, cb) => {
     function writeToFile(xlsxUrl, writeJsRoot) {
         let res = fs.readFileSync(xlsxUrl);
         const xlsxData = xlsx.parse(res)[0].data; // 第一个sheet
-        let langMap = {};
         // console.log(xlsxData);
+        let langMap = {};
         for (let i = 0; i < xlsxData.length; i++) {//读行
             if (i == 0) continue;//第一行是key
             for (let j = 0; j < xlsxData[i].length; j++) {//读列

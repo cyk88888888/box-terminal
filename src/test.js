@@ -3,7 +3,8 @@ var http = require('http');
 
 const doAction = () => {
     timeUT.consoleStartCli("test", new Date());
-    createServer();
+    // createServer();
+    testPromise();
 }
 
 const createServer = () =>{
@@ -21,6 +22,19 @@ const createServer = () =>{
     // 终端打印如下信息
     console.log('Server running at http://127.0.0.1:8888/');
     timeUT.consoleEndCli("test");
+}
+
+const testPromise = ()=>{
+    let promise = new Promise(function(resolve, reject) {
+        console.log('Promise');
+        resolve();
+      });
+      
+      promise.then(function() {
+        console.log('resolved.');
+      });
+      
+      console.log('Hi!');
 }
 module.exports = {
     doAction
