@@ -58,18 +58,24 @@ const readFile = (xlsxRoot, writeImgRoot, cb) => {
      */
     function writeToFile(xlsxUrl, writeJsRoot) {
         let res = fs.readFileSync(xlsxUrl);
-        const xlsxData = xlsx.parse(res)[0].data; // 第一个sheet
-        // console.log(xlsxData);
+        let allXlsxData = xlsx.parse(res);
+        // console.log(allXlsxData);
+        // const xlsxData = allXlsxData[0].data; // 第一个sheet
+        
         let langMap = {};
-        for (let i = 0; i < xlsxData.length; i++) {//读行
-            if (i == 0) continue;//第一行是key
-            for (let j = 0; j < xlsxData[i].length; j++) {//读列
-                if (j == 0) langMap[xlsxData[i][0]] = { firstImgName: xlsxData[0][1], firstImgUrl: xlsxData[i][1], dirName: xlsxData[0][2], imgList: [] };
-                else if (j >= 2) {
-                    langMap[xlsxData[i][0]].imgList.push(xlsxData[i][j]);
+        for (let index = 0; index < allXlsxData.length; index++) {
+            const xlsxData = allXlsxData[index].data;
+            for (let i = 0; i < xlsxData.length; i++) {//读行
+                if (i == 0) continue;//第一行是key
+                for (let j = 0; j < xlsxData[i].length; j++) {//读列
+                    if (j == 0) langMap[xlsxData[i][0]] = { firstImgName: xlsxData[0][1], firstImgUrl: xlsxData[i][1], dirName: xlsxData[0][2], imgList: [] };
+                    else if (j >= 2) {
+                        langMap[xlsxData[i][0]].imgList.push(xlsxData[i][j]);
+                    }
                 }
             }
         }
+     
         // console.log(langMap);
         let ps = [];
         for (let key in langMap) {
