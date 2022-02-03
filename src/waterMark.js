@@ -23,7 +23,7 @@ const toWaterMark = () => {
         .fill("white")			//字体内围颜色（不设置默认为黑色）
         .font(rootUrl + "font/msyh.ttf", 30) //字库所在文件夹和字体大小
         .drawText(50, 50, "中文China")
-        .rotate("white", 50)
+        // .rotate("white", 50)
         .write(rootUrl + "img/watermark.jpg", function (err) {
             if (!err) timeUT.consoleEndCli("water");
             else console.log(err);
