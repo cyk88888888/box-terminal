@@ -30,7 +30,14 @@ program.command('loadimg')
 .action(() => {
     loadImg.doAction();
 })
-    
+
+//合成图集
+program.command('ui')
+.description('合成图集')
+.action(() => {
+    loadImg.doAction();
+})
+
 // 中文收集并生成key对应中文的json文件  i18n-cli getlang -f zh.json -d pages,components
 program.command('getlang')
     .description('对当前目录下的 .js .vue .json .php文件进行中文收集，默认当前目录下面所有文件\n')
