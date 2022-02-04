@@ -7,6 +7,7 @@ const excel = require('./src/langToJs');
 const water = require('./src/waterMark');
 const getLang = require('./src/getChinese');
 const loadImg = require('./src/loadImg');
+const ui = require('./src/texturePacker');
 const test = require('./src/test');
 
 //解析xlsx为多语言文件
@@ -35,7 +36,7 @@ program.command('loadimg')
 program.command('ui')
 .description('合成图集')
 .action(() => {
-    loadImg.doAction();
+    ui.doAction();
 })
 
 // 中文收集并生成key对应中文的json文件  i18n-cli getlang -f zh.json -d pages,components
