@@ -32,9 +32,9 @@ program.command('loadimg')
     loadImg.doAction();
 })
 
-//合成图集
+//TexturePacker打包图集
 program.command('ui')
-.description('合成图集')
+.description('TexturePacker打包图集，将box_art/ui底下的所有文件夹打包成图集')
 .action(() => {
     ui.doAction();
 })
