@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
 const program = require('commander');
-const fs = require('fs');
-const path = require('path');
 const excel = require('./src/langToJs');
 const water = require('./src/waterMark');
 const getLang = require('./src/getChinese');
