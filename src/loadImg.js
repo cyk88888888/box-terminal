@@ -61,7 +61,7 @@ const readFile = (xlsxRoot, writeImgRoot, cb) => {
         let allXlsxData = xlsx.parse(res);
         // console.log(allXlsxData);
         // const xlsxData = allXlsxData[0].data; // 第一个sheet
-        
+
         let langMap = {};
         for (let index = 0; index < allXlsxData.length; index++) {
             const xlsxData = allXlsxData[index].data;
@@ -75,7 +75,7 @@ const readFile = (xlsxRoot, writeImgRoot, cb) => {
                 }
             }
         }
-     
+
         // console.log(langMap);
         let ps = [];
         for (let key in langMap) {
