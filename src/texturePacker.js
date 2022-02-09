@@ -5,7 +5,6 @@ const fs = require('fs');
 const doAction = () => {
     timeUT.consoleStartCli("ui", new Date());
     let uiRoot = __dirname.split('box-terminal')[0] + 'box_art' + path.sep + 'ui';
-    console.log(uiRoot);
     fs.access(uiRoot, (err) => {
         if (err) {
             console.error(`ui根目录${uiRoot}不存在`);
