@@ -47,7 +47,7 @@ const texturePacker = (uiRoot, uiFileNames) => {
         let plistName = fileName + '.plist';
         let outPngName = fileName + '.png';
         //TexturePacker的指令字符串
-        let cli = 'TexturePacker --format cocos2d-x --data ' + plistName + ' --sheet ' + outPngName + ' --png-opt-level 0 --max-width 2048 --max-height 2048 ' + fullPath;
+        let cli = 'TexturePacker --format cocos2d --data ' + plistName + ' --sheet ' + outPngName + ' --png-opt-level 0 --max-width 2048 --max-height 2048 ' + fullPath;
         let p = new Promise((resolve, reject) => {
             exec(cli, { cwd: writeImgRoot, encoding: 'utf8' }, function (err, stdout, stderr) {
                 if (err) {
