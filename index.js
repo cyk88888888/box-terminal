@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 const program = require('commander');
-const excel = require('./src/langToJs');
+const excel = require('./src/xlsxToLang');
 const water = require('./src/waterMark');
 const getLang = require('./src/getChinese');
 const loadImg = require('./src/loadImg');
 const ui = require('./src/texturePacker');
-const test = require('./src/test');
+const test = require('./src/__test');
 
 //解析xlsx为多语言文件
 program.command('xlsx')
