@@ -48,7 +48,7 @@ program.command('getlang')
         getLang.doAction(filename, ignoredir);
     });
 
-//从网络上下载图片
+//测试脚本
 program.command('test')
 .description('测试脚本')
 .action(() => {
