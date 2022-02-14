@@ -1,11 +1,9 @@
 const xlsx = require('node-xlsx').default;
 const fs = require('fs');
 const path = require('path');
-const timeUT = require('../lib/timeUT');
-const UT = require('../lib/UT');
 const request = require("request");
 const doAction = (type = 'json') => {
-    timeUT.consoleStartCli("loadimg", new Date());
+    TimeUT.consoleStartCli("loadimg", new Date());
 
     let xlsxRoot = process.cwd();//xlsx根目录
     let writeImgRoot = process.cwd() + path.sep + "loadImg";//要写入的文件根目录
@@ -20,7 +18,7 @@ const doAction = (type = 'json') => {
                 if (err) {
                     console.error(err)
                 } else {
-                    timeUT.consoleEndCli("loadimg");
+                    TimeUT.consoleEndCli("loadimg");
                 }
             })
         }
@@ -28,7 +26,7 @@ const doAction = (type = 'json') => {
 }
 
 const readFile = (xlsxRoot, writeImgRoot, cb) => {
-    let curTimeStr = timeUT.getCurTimeStr();
+    let curTimeStr = TimeUT.getCurTimeStr();
     console.log("%s: xlsxRoot----------------------->%s", curTimeStr, xlsxRoot);
     console.log("%s: writeImgRoot----------------------->%s", curTimeStr, writeImgRoot);
     try {

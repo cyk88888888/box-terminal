@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 
 const program = require('commander');
+const UT = require('./lib/UT');
+const TimeUT = require('./lib/TimeUT');
 const excel = require('./src/xlsxToLang');
 const water = require('./src/waterMark');
 const getLang = require('./src/getChinese');
 const loadImg = require('./src/loadImg');
 const ui = require('./src/texturePacker');
 const test = require('./src/__test');
-
+global.UT = UT;
+global.TimeUT = TimeUT;
 //解析xlsx为多语言文件
 program.command('xlsx')
     .description('必须cd到box_client/uni-app下执行命令，将box_cfg下对应版本目录lang.xlsx解析为多语言文件')

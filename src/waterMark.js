@@ -1,9 +1,8 @@
 const gm = require('gm').subClass({imageMagick: true});//加载ImageMagick
-const os = require('os');
+// const os = require('os');
 const fs = require('fs');
 const path = require('path');
-const timeUT = require('../lib/timeUT');
-let dirU = os.type().toLowerCase().includes('window') ? '\\' : '/' // window环境使用‘\\’mac系统使用‘/’
+// let dirU = os.type().toLowerCase().includes('window') ? '\\' : '/' // window环境使用‘\\’mac系统使用‘/’
 
 const doAction = (ignoredir) => {
     if (process.cwd().indexOf("box_client") == -1) {
@@ -11,22 +10,23 @@ const doAction = (ignoredir) => {
         process.exit();
         return;
     }
-    timeUT.consoleStartCli("water", new Date());
+    TimeUT.consoleStartCli("water", new Date());
     let artRoot = process.cwd().split("box_client")[0] + "box_art";
     let originalRoot = artRoot + path.sep + "original";//要加水印的根目录
     let outRoot = artRoot + path.sep + "out";//要保存加好水印图片的根目录
+    let curTimeStr = TimeUT.getCurTimeStr();
     fs.access(originalRoot, (err) => {
             if (err) {
-                console.error(`要加水印的根目录 ${originalRoot} 不存在`);
+                UT.logRed(UT.formatStr("%s: 要加水印的根目录----------------------->%s 不存在",curTimeStr, originalRoot));
                 process.exit();
             } else {
                 fs.access(outRoot, (err) => {
                         if (err) {
-                            console.error(`要保存加好水印图片的根目录 ${outRoot} 不存在`);
+                            UT.logRed(UT.formatStr("%s: 要保存加好水印图片的根目录----------------------->%s 不存在", curTimeStr, outRoot));
                             process.exit();
                         } else {
                             readFileList(originalRoot, outRoot, ignoredir).then(() => {
-                                timeUT.consoleEndCli("water");
+                                TimeUT.consoleEndCli("water");
                             });
                         }
                     }
@@ -37,7 +37,7 @@ const doAction = (ignoredir) => {
 }
 
 function readFileList(originalRoot, outRoot, ignoredir) {
-    let curTimeStr = timeUT.getCurTimeStr();
+    let curTimeStr = TimeUT.getCurTimeStr();
     console.log("%s: originalRoot----------------------->%s", curTimeStr, originalRoot);
     console.log("%s: outRoot----------------------->%s", curTimeStr, outRoot);
     let filesPathList = [];
@@ -86,7 +86,7 @@ const toWaterMark = (fullPath, cb) => {
         .size(function (err, val) {
             imgWidth = val.width;
             imgHeight = val.height;
-            let curTimeStr = timeUT.getCurTimeStr();
+            let curTimeStr = TimeUT.getCurTimeStr();
             console.log("%s: " + orginalImgUrl + " 图片宽高: " + imgWidth + "," + imgHeight, curTimeStr);
         })
         .stroke("black")		//字体外围颜色

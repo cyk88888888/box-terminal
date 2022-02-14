@@ -1,21 +1,20 @@
 const xlsx = require('node-xlsx').default;
 const fs = require('fs');
 const path = require('path');
-const timeUT = require('../lib/timeUT')
-const cfg = require(__dirname.split('src')[0] + '.env');
+const cfg = require(__dirname.split('box-terminal')[0] + '.env');
 const doAction = (type) => {
     let isServer = process.cwd().indexOf("box_server") > -1;//是否为编后端的表
     if (isServer && process.cwd().indexOf("na_manghe") == -1) {//服务端编译表的起始路径
-        console.error("Error:----->必须cd到na_manghe下执行命令");
+        UT.logRed("Error:----->必须cd到na_manghe下执行命令");
         process.exit();
         return;
     }
     if (!isServer && process.cwd().indexOf("uni-app") == -1 && process.cwd().indexOf("box-app") == -1) {//客户端编译表的起始路径
-        console.error("Error:----->必须cd到uni-app或者box-app下执行命令");
+        UT.logRed("Error:----->必须cd到uni-app或者box-app下执行命令");
         process.exit();
         return;
     }
-    timeUT.consoleStartCli("xlsx", new Date());
+    TimeUT.consoleStartCli("xlsx", new Date());
     let xlsxVersion = cfg.xlsxVersion;
     let preUrl = isServer ? process.cwd().split("box_server")[0] : process.cwd().indexOf("box_common") > -1 ? process.cwd().split("box_common")[0] : process.cwd().split("box_client")[0];
     let xlsxRoot = preUrl + "box_cfg" + path.sep + xlsxVersion + path.sep + "lang";//xlsx根目录
@@ -34,7 +33,7 @@ const doAction = (type) => {
                         if (err) {
                             console.error(err)
                         } else {
-                            timeUT.consoleEndCli("xlsx");
+                            TimeUT.consoleEndCli("xlsx");
                         }
                     })
                 }
@@ -44,7 +43,7 @@ const doAction = (type) => {
 }
 
 const readFile = (xlsxRoot, writeRoot, type, isServer, cb) => {
-    let curTimeStr = timeUT.getCurTimeStr();
+    let curTimeStr = TimeUT.getCurTimeStr();
     console.log("%s: xlsxRoot----------------------->%s", curTimeStr, xlsxRoot);
     console.log("%s: writeRoot----------------------->%s", curTimeStr, writeRoot);
     let xlsxName = isServer ? "server_lang" : "lang";//表名

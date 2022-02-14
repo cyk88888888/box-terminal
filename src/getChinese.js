@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const readline = require('readline');
-const timeUT = require('../lib/timeUT');
 
 let test = /[\u4E00-\u9FA5\uF900-\uFA2D]+[\u4E00-\u9FA5\uF900-\uFA2D\uff01\uff08-\uff1f\u3001-\u3015\u0020a-zA-Z\d\\\/+*/-]*/
 let rl = null
@@ -11,11 +10,11 @@ let isNote = false
 let dirU = os.type().toLowerCase().includes('window') ? '\\' : '/' // window环境使用‘\\’mac系统使用‘/’
 
 const doAction = (fileName = 'zh_cn.json', ignoredir) => {
-    timeUT.consoleStartCli("getlang", new Date());
+    TimeUT.consoleStartCli("getlang", new Date());
     readFileList(ignoredir).then(res => {
         inputLangs(fileName)
     }).catch(err => {
-        console.log(err)
+        UT.logRed(err);
     })
 }
 
@@ -38,8 +37,7 @@ function readFileList(ignoredir) {
     // return new Promise((resolve, reject) => {
     let filesList = [];
     let ps = [];
-    let rootUrl = process.cwd();
-    getFileList(rootUrl, filesList, ignoredir);
+    getFileList(process.cwd(), filesList, ignoredir);
     filesList.forEach((fullPath) => {
         let p = null;
         let path2 = fullPath.replace(process.cwd() + dirU + 'src' + dirU, '');
@@ -179,9 +177,9 @@ function inputLangs(fileName) {
 
     fs.writeFile(fileName, str, function (error) {``
         if (error) {
-            console.log(error)
+            UT.logRed(error);
         } else {
-            timeUT.consoleEndCli("getlang");
+            TimeUT.consoleEndCli("getlang");
         }
     })
 }
