@@ -1,7 +1,7 @@
 const xlsx = require('node-xlsx').default;
 const fs = require('fs');
 const path = require('path');
-const cfg = require(__dirname.split('box-terminal')[0] + '.env');
+const cfg = require(__dirname.split('src')[0] + '.env');
 const doAction = (type) => {
     let isServer = process.cwd().indexOf("box_server") > -1;//是否为编后端的表
     if (isServer && process.cwd().indexOf("na_manghe") == -1) {//服务端编译表的起始路径
