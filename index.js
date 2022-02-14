@@ -59,7 +59,7 @@ program.command('test')
 })
 
 program.on('command:*', function () {
-    console.error('Invalid command: %s\nSee --help for a list of available commands.', program.args.join(' '));
+    UT.logRed(UT.formatStr('Invalid command: %s\nSee --help for a list of available commands.', program.args.join(' ')));
     process.exit(1);
 });
 if (process.argv.length === 2) {
