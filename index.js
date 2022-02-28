@@ -15,7 +15,7 @@ global.TimeUT = TimeUT;
 program.command('xlsx')
     .description('必须cd到box_client/uni-app下执行命令，将box_cfg下对应版本目录lang.xlsx解析为多语言文件')
     .option('-t, --type <type>', '[optional]设置解析xlsx为.json格式还是.js格式，默认为.json\n')
-    .action(({type = "json"}) => {
+    .action(({ type = "json" }) => {
         excel.doAction(type);
     })
 
@@ -28,17 +28,17 @@ program.command('water')
 
 //从网络上下载图片
 program.command('loadimg')
-.description('从网络上下载图片')
-.action(() => {
-    loadImg.doAction();
-})
+    .description('从网络上下载图片')
+    .action(() => {
+        loadImg.doAction();
+    })
 
 //TexturePacker打包图集
 program.command('ui')
-.description('TexturePacker打包图集，将box_art/ui底下的所有文件夹打包成图集')
-.action(() => {
-    ui.doAction();
-})
+    .description('TexturePacker打包图集，将box_art/ui底下的所有文件夹打包成图集')
+    .action(() => {
+        ui.doAction();
+    })
 
 // 中文收集并生成key对应中文的json文件  i18n-cli getlang -f zh.json -d pages,components
 program.command('getlang')
@@ -47,16 +47,16 @@ program.command('getlang')
     .option('-d, --ignoredir <ignoredir>', '[optional]需要收集中文的文件夹，默认当前文件夹所有文件', value => {
         return value.split(',')
     })
-    .action(({filename = 'zh_cn.json', ignoredir}) => {
+    .action(({ filename = 'zh_cn.json', ignoredir }) => {
         getLang.doAction(filename, ignoredir);
     });
 
 //测试脚本
 program.command('test')
-.description('测试脚本')
-.action(() => {
-    test.doAction();
-})
+    .description('测试脚本')
+    .action(() => {
+        test.doAction();
+    })
 
 program.on('command:*', function () {
     UT.logRed(UT.formatStr('Invalid command: %s\nSee --help for a list of available commands.', program.args.join(' ')));
