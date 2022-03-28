@@ -12,7 +12,9 @@
   "author": "cyk",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.26.1",
     "commander": "^8.3.0",
+    "download": "^8.0.0",
     "gm": "^1.23.1",
     "images": "^3.2.3",
     "node-xlsx": "^0.21.0",

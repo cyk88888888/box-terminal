@@ -10,7 +10,7 @@ let isNote = false
 let dirU = os.type().toLowerCase().includes('window') ? '\\' : '/' // window环境使用‘\\’mac系统使用‘/’
 
 const doAction = (fileName = 'zh_cn.json', ignoredir) => {
-    TimeUT.consoleStartCli("getlang", new Date());
+    TimeUT.consoleStartCli("getlang");
     readFileList(ignoredir).then(res => {
         inputLangs(fileName)
     }).catch(err => {

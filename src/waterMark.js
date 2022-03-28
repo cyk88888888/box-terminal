@@ -10,19 +10,18 @@ const doAction = (ignoredir) => {
         process.exit();
         return;
     }
-    TimeUT.consoleStartCli("water", new Date());
+    TimeUT.consoleStartCli("water");
     let artRoot = process.cwd().split("box_client")[0] + "box_art";
     let originalRoot = artRoot + path.sep + "original";//要加水印的根目录
     let outRoot = artRoot + path.sep + "out";//要保存加好水印图片的根目录
-    let curTimeStr = TimeUT.getCurTimeStr();
     fs.access(originalRoot, (err) => {
             if (err) {
-                UT.logRed(UT.formatStr("%s: 要加水印的根目录----------------------->%s 不存在",curTimeStr, originalRoot));
+                UT.logRed(TimeUT.logwithTimeStr(UT.formatStr("要加水印的根目录----------------------->%s 不存在", originalRoot)));
                 process.exit();
             } else {
                 fs.access(outRoot, (err) => {
                         if (err) {
-                            UT.logRed(UT.formatStr("%s: 要保存加好水印图片的根目录----------------------->%s 不存在", curTimeStr, outRoot));
+                            UT.logRed(TimeUT.logwithTimeStr(UT.formatStr("要保存加好水印图片的根目录----------------------->%s 不存在", outRoot)));
                             process.exit();
                         } else {
                             readFileList(originalRoot, outRoot, ignoredir).then(() => {
@@ -37,9 +36,8 @@ const doAction = (ignoredir) => {
 }
 
 function readFileList(originalRoot, outRoot, ignoredir) {
-    let curTimeStr = TimeUT.getCurTimeStr();
-    console.log("%s: originalRoot----------------------->%s", curTimeStr, originalRoot);
-    console.log("%s: outRoot----------------------->%s", curTimeStr, outRoot);
+    TimeUT.logwithTimeStr(UT.formatStr('originalRoot----------------------->%s', originalRoot));
+    TimeUT.logwithTimeStr(UT.formatStr('outRoot----------------------->%s', outRoot));
     let filesPathList = [];
     let ps = [];
     getFileList(originalRoot, filesPathList, ignoredir);
@@ -86,8 +84,7 @@ const toWaterMark = (fullPath, cb) => {
         .size(function (err, val) {
             imgWidth = val.width;
             imgHeight = val.height;
-            let curTimeStr = TimeUT.getCurTimeStr();
-            console.log("%s: " + orginalImgUrl + " 图片宽高: " + imgWidth + "," + imgHeight, curTimeStr);
+            TimeUT.logwithTimeStr(orginalImgUrl + " 图片宽高: " + imgWidth + "," + imgHeight);
         })
         .stroke("black")		//字体外围颜色
         .fill("black")			//字体内围颜色（不设置默认为黑色）

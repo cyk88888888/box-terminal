@@ -14,7 +14,7 @@ const doAction = (type) => {
         process.exit();
         return;
     }
-    TimeUT.consoleStartCli("xlsx", new Date());
+    TimeUT.consoleStartCli("xlsx");
     let xlsxVersion = cfg.xlsxVersion;
     let preUrl = isServer ? process.cwd().split("box_server")[0] : process.cwd().indexOf("box_common") > -1 ? process.cwd().split("box_common")[0] : process.cwd().split("box_client")[0];
     let xlsxRoot = preUrl + "box_cfg" + path.sep + xlsxVersion + path.sep + "lang";//xlsx根目录
@@ -43,9 +43,8 @@ const doAction = (type) => {
 }
 
 const readFile = (xlsxRoot, writeRoot, type, isServer, cb) => {
-    let curTimeStr = TimeUT.getCurTimeStr();
-    console.log("%s: xlsxRoot----------------------->%s", curTimeStr, xlsxRoot);
-    console.log("%s: writeRoot----------------------->%s", curTimeStr, writeRoot);
+    TimeUT.logwithTimeStr(UT.formatStr('xlsxRoot----------------------->%s', xlsxRoot));
+    TimeUT.logwithTimeStr(UT.formatStr('writeRoot----------------------->%s', writeRoot));
     let xlsxName = isServer ? "server_lang" : "lang";//表名
     try {
         fs.readdir(xlsxRoot, function (err, files) {

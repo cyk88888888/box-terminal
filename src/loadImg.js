@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const request = require("request");
 const doAction = (type = 'json') => {
-    TimeUT.consoleStartCli("loadimg", new Date());
+    TimeUT.consoleStartCli("loadimg");
 
     let xlsxRoot = process.cwd();//xlsx根目录
     let writeImgRoot = process.cwd() + path.sep + "loadImg";//要写入的文件根目录
@@ -26,9 +26,8 @@ const doAction = (type = 'json') => {
 }
 
 const readFile = (xlsxRoot, writeImgRoot, cb) => {
-    let curTimeStr = TimeUT.getCurTimeStr();
-    console.log("%s: xlsxRoot----------------------->%s", curTimeStr, xlsxRoot);
-    console.log("%s: writeImgRoot----------------------->%s", curTimeStr, writeImgRoot);
+    TimeUT.logwithTimeStr(UT.formatStr('xlsxRoot----------------------->%s', xlsxRoot));
+    TimeUT.logwithTimeStr(UT.formatStr('writeImgRoot----------------------->%s', writeImgRoot));
     try {
         fs.readdir(xlsxRoot, function (err, files) {
             if (err) {

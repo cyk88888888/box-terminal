@@ -8,6 +8,7 @@ const water = require('./src/waterMark');
 const getLang = require('./src/getChinese');
 const loadImg = require('./src/loadImg');
 const ui = require('./src/texturePacker');
+const reptile = require('./src/reptile');
 const test = require('./src/__test');
 global.UT = UT;
 global.TimeUT = TimeUT;
@@ -51,6 +52,13 @@ program.command('getlang')
         getLang.doAction(filename, ignoredir);
     });
 
+
+//爬虫下载图片
+program.command('reptile')
+    .description('爬虫下载图片')
+    .action(() => {
+        reptile.doAction();
+    })
 //测试脚本
 program.command('test')
     .description('测试脚本')

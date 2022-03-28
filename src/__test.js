@@ -2,7 +2,7 @@ const timeUT = require('../lib/timeUT');
 var http = require('http');
 
 const doAction = () => {
-    timeUT.consoleStartCli("test", new Date());
+    timeUT.consoleStartCli("test");
     // createServer();
     testPromise();
 }

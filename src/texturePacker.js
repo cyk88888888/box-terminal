@@ -2,7 +2,7 @@ const exec = require('child_process').exec;
 const path = require('path');
 const fs = require('fs');
 const doAction = () => {
-    TimeUT.consoleStartCli("ui", new Date());
+    TimeUT.consoleStartCli("ui");
     let uiRoot = __dirname.split('box-ternima')[0] + 'box_art' + path.sep + 'ui';
     fs.access(uiRoot, (err) => {
         if (err) {
